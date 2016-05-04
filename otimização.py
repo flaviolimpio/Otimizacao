@@ -17,23 +17,19 @@ V_VOO = 16.782
 VISCOSIDADE_DINAMICA = 1.789*10**-5
 
 if __name__ == "__main__":
-    lista_de_asas = list()
     
-#    for i in np.arange(0,1,0.05):
-#        b = 2.8; c_r = 0.41; c_t = 0.25 ; b_r = 1.8
-#        c_r = c_r + i
-#        lista_de_asas.append(Asa(b, c_r, c_t, b_r)) 
+    range_b= (1.5,2.5,0.02)
+    range_c_r = (0.3,0.55,0.05)
+    range_c_t = (0.15,0.30,0.02)
+    range_b_r = (0,1,2) # envergadura retangular = 0
+    range_h = (0.05, 0.1, 0.01)    
     
-    b = 2.8; c_r = 0.41; c_t = 0.25 ; b_r = 1.8
-
-    for valor in np.arange(0.41,0.81,0.05):
-
-        c_r = valor
-        lista_de_asas.append(Asa(b, c_r, c_t, b_r))         
-        
-    for i in range(len(lista_de_asas)):
-        print(" c_r  " + str(lista_de_asas[i].c_r)+ "  tr  "+ str(lista_de_asas[i].tr))
-    print("\n")
+    intervalos=[range_b,range_c_r,range_c_t,range_b_r,range_h]
+    parametros = gerar_listas_param(intervalos)
+    asas = gerar_listas(Asa, parametros)
+    for asa in asas:
+   #    print(str(asa.b)+" "+ str(asa.c_r) + " "+ str(asa.c_t)+" "+ str(asa.b_r) + " ")
+        print("b:" + str(asa.b)+ "  "+ "s:" + str(asa.s) + "  " + "AR:" + (str(asa.ar)))
     
-    asaA001 = Asa(1.8, 0.3121, 0.1594, 0)
+    asaA001 = Asa(1.8, 0.3121, 0.1594, 0,0.1)
     a= asaA001
