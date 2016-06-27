@@ -19,10 +19,10 @@ class Perfil(object):
 #cls_perfil=dict()
 #cds_perfil=dict()
 
-cls = [0.1,0.2,0.3]
-cds = [0.15,0.25,0.35]
 
 selig1223= Perfil(1.891259, 0.09741, Selig1223.cl, Selig1223.cd)
+
+selig1223= Perfil(5.891259, 0.09741, Selig1223.cl, Selig1223.cd)
 
 class Aeronave(object):
     '''
@@ -32,10 +32,15 @@ class Aeronave(object):
         self.empenagem = None
         self.trem_de_pouso = None  
     '''
+    
+    c_fe = 0.0055    
+    
     def __init__(self):
         self.asa = None
         self.empenagem = None
         self.trem_de_pouso = None        
+        
+        
         
 class Perfil_aerodinâmico(object):
     pass
@@ -56,13 +61,13 @@ class Asa(object):
         self.perfil = Perfil(1.891259, 0.09741, selig1223.cls, selig1223.cds)
         
 #tr vem de taper ratio e significa afilamento
-        self.tr = Calc.afilamento(self.c_t, self.c_r)
-        self.s = Calc.area(c_r, b_r, c_t, self.b_t)
-        self.ar = Calc.alongamento(b, self.s)
-        self.c_MA = Calc.c_MA(c_r, self.tr)
+        self.tr = Calc.afilamento(self)
+        self.s = Calc.area(self)
+        self.ar = Calc.alongamento(self)
+        self.c_MA = Calc.c_MA(self)
         
 #Características de asa finita
-        self.delta = Calc.delta(self.tr,self.ar)
+        self.delta = Calc.delta(self)
         self.e = Calc.eficiencia_da_envergadura(self.delta)
         self.a = Calc.coeficiente_angular_asa(self.perfil.a0, self.e, self.ar)
         self.dif = Calc.razao_perfil_asa_finita(self.a, self.perfil.a0)
@@ -72,7 +77,7 @@ class Asa(object):
         self.clmax = max(self.cls)
         
 #        self.area_molhada = 
-        self.s_wet = Calc.area_molhada(4.18)
+        self.s_wet = Calc.area_molhada(self)
         
         
 
